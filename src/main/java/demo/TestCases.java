@@ -127,8 +127,9 @@ public class TestCases {
         WebElement dropdownButton =  driver.findElement(By.xpath("(//div[@class='e2CuFe eU809d' and @role='presentation'])[1]"));
         js.executeScript("arguments[0].scrollIntoView(true);", dropdownButton);
         dropdownButton.click();
-        List<WebElement> dropdownList = driver.findElements(By.xpath("//span[@class='vRMGwf oJeWuf']/preceding-sibling::div/parent::div"));
         Thread.sleep(1000);
+        List<WebElement> dropdownList = driver.findElements(By.xpath("//span[@class='vRMGwf oJeWuf']"));
+        // Thread.sleep(1000);
         status = SeleniumWrapper.dropDownSelection(dropdownList, "Mrs", driver);
         // Thread.sleep(5000);
         System.out.println("end Test case: testCase06");
@@ -138,25 +139,25 @@ public class TestCases {
         System.out.println("");
         System.out.println("Start Test case: testCase07");
         
-        WebElement calendarButton = driver.findElement(By.xpath("//div[@class='aXBtI Wic03c']/div/input[@type='date']"));
-        js.executeScript("arguments[0].scrollIntoView(true);", calendarButton);
+        WebElement calendarButton = driver.findElement(By.xpath("//input[@type='date']"));
+        // js.executeScript("arguments[0].scrollIntoView(true);", calendarButton);
+       
+        // calendarButton.click();
         Thread.sleep(2000);
-        calendarButton.click();
-        
         // js.executeScript("arguments[0].scrollIntoView(true);", calendarButton);
         LocalDate currentDate = LocalDate.now();
         LocalDate sevenDaysAgo = currentDate.minusDays(7);
         String pattern = "dd/MM/yyyy";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        Thread.sleep(2000);
+        // Thread.sleep(2000);
+        calendarButton.clear();
         String date = sevenDaysAgo.format(formatter);
-        // calendarButton.sendKeys(date);
-        Thread.sleep(5000);
+        // SeleniumWrapper.sendkeys(calendarButton, date, driver);
+        calendarButton.sendKeys(date);
+        // Thread.sleep(5000);
         //locate the webelement for the date field of the 7th question
         //select the date 7 days ago
-        
-        
-        System.out.println(sevenDaysAgo.format(formatter));
+        // System.out.println(sevenDaysAgo.format(formatter));
         
         System.out.println("end Test case: testCase07");
     }
@@ -185,18 +186,19 @@ public class TestCases {
         // System.out.println(period);
         // System.out.println("Current time: " + hour + ":" + currentTime.getMinute() + ":" + currentTime.getSecond() + " " + period);
         driver.findElement(By.xpath("(//div[@class='e2CuFe eU809d' and @role='presentation'])[2]")).click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         List<WebElement> list = driver.findElements(By.xpath("//div[@class='MocG8c HZ3kWc mhLiyf LMgvRb']/div/following-sibling::span"));
         for(WebElement ele : list)
         {
             
             if(ele.getText().equals(period))
             {
-                // System.out.println(ele.getText());
+                System.out.println(ele.getText());
                 ele.click();
                 break;
             }
         }
+        // Thread.sleep(2000);
         
         System.out.println("end Test case: testCase08");
     }
@@ -227,7 +229,16 @@ public class TestCases {
         System.out.println("Start Test case: testCase11");
         //check the message is displayed as " Thanks for your response, Automateion Wizard!"
         //print the message
-       
+      
+        WebElement response = driver.findElement(By.xpath("//div[@class='vHW8K']"));
+        wait.until(ExpectedConditions.visibilityOf(response));
+        String text = response.getText();
+        // System.out.println(response.getText());
+        
+        if(text.equals("Thanks for your response, Automation Wizard!"))
+            System.out.println("Success message matches");
+        else    
+            System.out.println("Sucess Message not match");
         System.out.println("end Test case: testCase11");
     }
 

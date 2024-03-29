@@ -120,7 +120,7 @@ public class SeleniumWrapper {
             // wait.until(ExpectedConditions.visibilityOf(text));
             Thread.sleep(1000);
             String val = ele.getText();
-            System.out.println(val);
+            // System.out.println(val);
             if(val.equals(textSelectedInDropDown))
             {
                 ele.click();
