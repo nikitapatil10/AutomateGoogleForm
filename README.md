@@ -16,9 +16,11 @@ Provide sample code or usage scenarios to showcase how the project works.
 > Example:
 ```
 # to run the project
-./gradlew run
+gradle run
 ```
 
 ## Important Links:
 Details about useful external links
  
+Created separate wrapper class to make a code clean and clear
+and calling the methods of wrapper class into the testcases.
